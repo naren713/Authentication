@@ -46,5 +46,6 @@ app.use(function (req, res, next) {
 app.use("/", require("./controllers/HomePage"));
 app.use("/", require("./controllers/Register"));
 app.use("/", require("./controllers/Login"));
+app.use("/", require("./controllers/About"));
 
 app.listen(PORT, () => console.log(`Server Started on Port ${PORT}`));

@@ -31,9 +31,19 @@ router.post("/login", async (req, res) => {
   const token = JWT.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "1hr",
   });
-  res.header("auth-token", token);
+  res.cookie("token", token, {
+    maxAge: 1 * 1000 * 60 * 60, // Valid for 1 hour
+    httpOnly: true,
+    // sameSite: true,
+  });
+  res.redirect("/");
 
-  res.render("homePage", { token, name: user.name });
+  // res.render("homePage", { token, name: user.name });
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
 });
 
 module.exports = router;

@@ -1,8 +1,13 @@
 const JWT = require("jsonwebtoken");
 
+require("dotenv").config();
+
 module.exports = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).send("Access Denied");
+  const token = req.cookies.token;
+  if (!token)
+    return res
+      .status(401)
+      .send(`<p>Please <a href="/login">Log-in</a> to view this page</p>`);
 
   try {
     const verified = JWT.verify(token, process.env.TOKEN_SECRET);

@@ -7,9 +7,7 @@ const Users = require("../models/Users");
 const authenticate = require("../verifyTokens");
 
 router.get("/", authenticate, (req, res) => {
-  Users.findOne({ _id: req.user }).then((data) => {
-    res.render("homePage", { data });
-  });
+  res.render("homePage");
   // res.send(req.user);
 });
 
